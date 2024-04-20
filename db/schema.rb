@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_18_235718) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_20_000441) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -33,6 +33,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_18_235718) do
     t.string "srtext", limit: 2048
     t.string "proj4text", limit: 2048
     t.check_constraint "srid > 0 AND srid <= 998999", name: "spatial_ref_sys_srid_check"
+  end
+
+  create_table "types", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
