@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_25_224245) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_26_221609) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -27,12 +27,37 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_224245) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, default: nil, force: :cascade do |t|
-    t.string "auth_name", limit: 256
-    t.integer "auth_srid"
-    t.string "srtext", limit: 2048
-    t.string "proj4text", limit: 2048
-    t.check_constraint "srid > 0 AND srid <= 998999", name: "spatial_ref_sys_srid_check"
+  create_table "stops", force: :cascade do |t|
+    t.string "name"
+    t.geometry "trayectory_geom", limit: {:srid=>0, :type=>"geometry"}
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stops_cities", force: :cascade do |t|
+    t.bigint "stop_id"
+    t.bigint "city_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_stops_cities_on_city_id"
+    t.index ["stop_id"], name: "index_stops_cities_on_stop_id"
+  end
+
+  create_table "trajectories", force: :cascade do |t|
+    t.string "name"
+    t.time "passing_frequency"
+    t.integer "estimated_time"
+    t.integer "service_cost"
+    t.time "start_time"
+    t.time "end_time"
+    t.point "trajectory_point"
+    t.bigint "cities_id", null: false
+    t.bigint "services_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cities_id"], name: "index_trajectories_on_cities_id"
+    t.index ["services_id"], name: "index_trajectories_on_services_id"
   end
 
   create_table "types", force: :cascade do |t|
@@ -42,4 +67,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_224245) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "units", force: :cascade do |t|
+    t.string "name"
+    t.integer "capacity"
+    t.bigint "type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type_id"], name: "index_units_on_type_id"
+  end
+
+  add_foreign_key "stops_cities", "cities"
+  add_foreign_key "stops_cities", "stops"
+  add_foreign_key "trajectories", "cities", column: "cities_id"
+  add_foreign_key "trajectories", "services", column: "services_id"
+  add_foreign_key "units", "types"
 end

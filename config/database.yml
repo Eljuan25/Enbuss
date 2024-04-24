@@ -5,14 +5,11 @@
 #   gem "sqlite3"
 #
 default: &default
-  adapter: postgresql
+  adapter: postgis
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: localhost
-  port: 5432
-  extension: postgis
-  schema_search_path: "public,postgis"
-  
+
 development:
   <<: *default
   database: Enbuss_development

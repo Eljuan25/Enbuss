@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  passing_frequency: 2024-04-24 13:03:01
+  estimated_time: 1
+  service_cost: 1
+  start_time: 2024-04-24 13:03:01
+  end_time: 2024-04-24 13:03:01
+  trajectory_point: 
+  cities: one
+  services: one
+
+two:
+  name: MyString
+  passing_frequency: 2024-04-24 13:03:01
+  estimated_time: 1
+  service_cost: 1
+  start_time: 2024-04-24 13:03:01
+  end_time: 2024-04-24 13:03:01
+  trajectory_point: 
+  cities: two
+  services: two
