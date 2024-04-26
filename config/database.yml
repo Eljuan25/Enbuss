@@ -5,6 +5,7 @@
 #   gem "sqlite3"
 #
 default: &default
+  # Adapter must be postgis in order to make the points and column :geometry column types work
   adapter: postgis
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
