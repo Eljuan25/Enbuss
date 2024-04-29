@@ -27,12 +27,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_224245) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, default: nil, force: :cascade do |t|
-    t.string "auth_name", limit: 256
-    t.integer "auth_srid"
-    t.string "srtext", limit: 2048
-    t.string "proj4text", limit: 2048
-    t.check_constraint "srid > 0 AND srid <= 998999", name: "spatial_ref_sys_srid_check"
+  create_table "trajectories", force: :cascade do |t|
+    t.string "name", null: false
+    t.time "passing_frequency", null: false
+    t.integer "estimated_time", null: false
+    t.integer "service_cost", null: false
+    t.time "start_time", null: false
+    t.time "end_time", null: false
+    t.point "trajectory_point", null: false
+    t.bigint "cities_id", null: false
+    t.bigint "services_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cities_id"], name: "index_trajectories_on_cities_id"
+    t.index ["services_id"], name: "index_trajectories_on_services_id"
   end
 
   create_table "types", force: :cascade do |t|
@@ -42,4 +50,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_224245) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "trajectories", "cities", column: "cities_id"
+  add_foreign_key "trajectories", "services", column: "services_id"
 end

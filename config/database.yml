@@ -5,12 +5,11 @@
 #   gem "sqlite3"
 #
 default: &default
-  adapter: postgresql
+  # Adapter must be postgis in order to make the points and column :geometry column types work
+  adapter: postgis
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: localhost
-  port: 5432
-  extension: postgis
 
 development:
   <<: *default
