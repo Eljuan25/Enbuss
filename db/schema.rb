@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_26_224349) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_26_231450) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -85,6 +85,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_26_224349) do
     t.index ["type_id"], name: "index_units_on_type_id"
   end
 
+  create_table "units_trajectories", force: :cascade do |t|
+    t.bigint "unit_id"
+    t.bigint "trajectory_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trajectory_id"], name: "index_units_trajectories_on_trajectory_id"
+    t.index ["unit_id"], name: "index_units_trajectories_on_unit_id"
+  end
+
   add_foreign_key "stops_cities", "cities"
   add_foreign_key "stops_cities", "stops"
   add_foreign_key "trajectories", "cities", column: "cities_id"
@@ -92,4 +101,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_26_224349) do
   add_foreign_key "trajectories_stops", "stops"
   add_foreign_key "trajectories_stops", "trajectories"
   add_foreign_key "units", "types"
+  add_foreign_key "units_trajectories", "trajectories"
+  add_foreign_key "units_trajectories", "units"
 end
