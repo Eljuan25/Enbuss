@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_26_224349) do
   end
 
   create_table "stops", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.geometry "trayectory_geom", limit: {:srid=>0, :type=>"geometry"}
     t.string "address"
     t.datetime "created_at", null: false
