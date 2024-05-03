@@ -1,4 +1,4 @@
-class UnitsTrajectoriesModel < ApplicationRecord
+class TrajectoryUnit < ApplicationRecord
     belongs_to :unit
     belongs_to :trajectory
       
