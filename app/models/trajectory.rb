@@ -3,6 +3,4 @@ class Trajectory < ApplicationRecord
     belongs_to :city
     belongs_to :service
 
-    validates :city_id, presence: true 
-    validates :services_id, presence: true 
 end
