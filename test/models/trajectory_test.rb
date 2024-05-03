@@ -1,6 +1,6 @@
 require "test_helper"
 
-class StopSkipMigrationTest < ActiveSupport::TestCase
+class TrajectoryTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
