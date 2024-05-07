@@ -1,5 +1,5 @@
 class Service < ApplicationRecord
-    has_many : trajectory 
+    has_many : trajectories
 
      validates :name, presence: true
 end
