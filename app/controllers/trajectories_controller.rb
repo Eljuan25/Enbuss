@@ -1,5 +1,5 @@
 class TrajectoriesController < ApplicationController
-    before_action :set_trajectory, only [show update destroy]
+    before_action :set_trajectory, only: %i[show update destroy]
     
     # Get
     def index 
