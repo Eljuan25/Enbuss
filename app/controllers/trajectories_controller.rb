@@ -1,5 +1,5 @@
 class TrajectoriesController < ApplicationController
   def index
-    @TrajectoriesController = Trajectories.includes(:city).all
+    @trajectories = trajectories.includes(:city).all
   end
 end
