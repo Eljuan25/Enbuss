@@ -23,12 +23,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_232734) do
 
   create_table "schedules", force: :cascade do |t|
     t.time "time"
-    t.bigint "trajectories_id", null: false
+    t.bigint "trajectory_id", null: false
     t.bigint "stop_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["stop_id"], name: "index_schedules_on_stop_id"
-    t.index ["trajectories_id"], name: "index_schedules_on_trajectories_id"
+    t.index ["trajectory_id"], name: "index_schedules_on_trajectory_id"
   end
 
   create_table "services", force: :cascade do |t|
@@ -105,7 +105,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_232734) do
   end
 
   add_foreign_key "schedules", "stops"
-  add_foreign_key "schedules", "trajectories", column: "trajectories_id"
+  add_foreign_key "schedules", "trajectories"
   add_foreign_key "stops_cities", "cities"
   add_foreign_key "stops_cities", "stops"
   add_foreign_key "trajectories", "cities", column: "cities_id"
