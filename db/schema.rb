@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.1].define(version: 2024_05_15_233709) do
+=======
+ActiveRecord::Schema[7.1].define(version: 2024_05_07_232734) do
+>>>>>>> 0c4dc4d (I did the create Index StopController and arranged the query params parameters)
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -23,12 +27,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_15_233709) do
 
   create_table "schedules", force: :cascade do |t|
     t.time "time"
+<<<<<<< HEAD
     t.bigint "trajectory_id", null: false
+=======
+    t.bigint "trajectories_id", null: false
+>>>>>>> 0c4dc4d (I did the create Index StopController and arranged the query params parameters)
     t.bigint "stop_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["stop_id"], name: "index_schedules_on_stop_id"
+<<<<<<< HEAD
     t.index ["trajectory_id"], name: "index_schedules_on_trajectory_id"
+=======
+    t.index ["trajectories_id"], name: "index_schedules_on_trajectories_id"
+>>>>>>> 0c4dc4d (I did the create Index StopController and arranged the query params parameters)
   end
 
   create_table "services", force: :cascade do |t|
@@ -110,7 +122,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_15_233709) do
   end
 
   add_foreign_key "schedules", "stops"
+<<<<<<< HEAD
   add_foreign_key "schedules", "trajectories"
+=======
+  add_foreign_key "schedules", "trajectories", column: "trajectories_id"
+>>>>>>> 0c4dc4d (I did the create Index StopController and arranged the query params parameters)
   add_foreign_key "stops_cities", "cities"
   add_foreign_key "stops_cities", "stops"
   add_foreign_key "trajectories", "cities"
