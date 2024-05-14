@@ -1,4 +1,4 @@
 class TrajectoriesController < ApplicationController
   def index 
-    @trajectories = Trajectory.includes(:city).all
+    Trajectory.where(city_id:params.fetch(:city_id,[]))
   end
