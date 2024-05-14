@@ -1,10 +1,6 @@
 class TrajectoriesController < ApplicationController
-    before_action :set_trajectory, only: %i[show update destroy]
-  
-    def index
-      @trajectories = Trajectory.all
-      render json: @trajectories.to_json(include: :schedules)
-    end
+    before_action :set_trajectory, only: %i[show create update destroy]
+
   
     def show
       @trajectory = Trajectory.includes(:schedules).find(params[:id])
