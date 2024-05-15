@@ -4,7 +4,7 @@ class TrajectoriesController < ApplicationController
   
     def show
       @trajectory = Trajectory.includes(:schedules).find(params[:id])
-      render json: @trajectory.to_json(include: :schedules)
+      render json: @trajectory.to_json(include: :schedules), status: :ok
     end
   
     def create
