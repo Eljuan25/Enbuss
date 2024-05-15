@@ -1,5 +1,5 @@
 class City < ApplicationRecord
     has_many :stops
 
-    validate :name, presence:true
+    validates :name, presence:true
 end
