@@ -9,6 +9,7 @@ default: &default
   adapter: postgis
   encoding: unicode
   host: localhost
+  port: <%= ENV.fetch('DB_PORT', 5432) %>
 
 development:
   <<: *default
