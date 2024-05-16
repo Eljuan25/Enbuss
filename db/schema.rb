@@ -63,18 +63,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_15_233709) do
 
   create_table "trajectories", force: :cascade do |t|
     t.string "name", null: false
-    t.time "passing_frequency", null: false
+    t.integer "passing_frequency", null: false
     t.integer "estimated_time", null: false
     t.integer "service_cost", null: false
     t.time "start_time", null: false
     t.time "end_time", null: false
     t.point "trajectory_point", null: false
-    t.bigint "cities_id", null: false
-    t.bigint "services_id", null: false
+    t.bigint "city_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cities_id"], name: "index_trajectories_on_cities_id"
-    t.index ["services_id"], name: "index_trajectories_on_services_id"
+    t.index ["city_id"], name: "index_trajectories_on_city_id"
   end
 
   create_table "trajectories_stops", force: :cascade do |t|
@@ -115,8 +113,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_15_233709) do
   add_foreign_key "schedules", "trajectories"
   add_foreign_key "stops_cities", "cities"
   add_foreign_key "stops_cities", "stops"
-  add_foreign_key "trajectories", "cities", column: "cities_id"
-  add_foreign_key "trajectories", "services", column: "services_id"
+  add_foreign_key "trajectories", "cities"
   add_foreign_key "trajectories_stops", "stops"
   add_foreign_key "trajectories_stops", "trajectories"
   add_foreign_key "units", "types"

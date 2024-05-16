@@ -1,5 +1,5 @@
 class Type < ApplicationRecord
-    belongs_to :unit
+    has_many :unit
 
     validates :name, presence: true
 end
