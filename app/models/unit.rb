@@ -1,6 +1,6 @@
 class Unit < ApplicationRecord
     has_one :trajectory
-    has_many :types
+    belongs_to :type
 
     validates :name, presence: true, length: { maximum: 50 }
     validates :capacity, presence: true
