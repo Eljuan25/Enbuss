@@ -2,12 +2,7 @@ class StopsController < ApplicationController
     before_action :set_stop, only: %i[show update destroy]
   
     def show
-      render json: {
-        id: @stop.id,
-        name: @stop.name,
-        other_attribute: @stop.other_attribute,
-        schedules: @stop.schedules.map { |schedule| { id: schedule.id, time: schedule.time } }
-      }
+    @stops = Stop.find_with_schedules(params[:id])
     end
 
     def create
