@@ -4,7 +4,6 @@ class CreateSchedules < ActiveRecord::Migration[7.1]
       t.time :time
       t.references :trajectory, null: false, foreign_key: true
       t.references :stop, null: false, foreign_key: true
-
       t.timestamps
     end
   end
