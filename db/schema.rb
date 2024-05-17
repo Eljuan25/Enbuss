@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_07_232734) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_15_233709) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -37,6 +37,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_232734) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "services_units", id: false, force: :cascade do |t|
+    t.bigint "service_id", null: false
+    t.bigint "unit_id", null: false
+    t.index ["service_id", "unit_id"], name: "index_services_units_on_service_id_and_unit_id"
+    t.index ["unit_id", "service_id"], name: "index_services_units_on_unit_id_and_service_id"
+  end
+
   create_table "stops", force: :cascade do |t|
     t.string "name", null: false
     t.geometry "trajectory_geom", limit: {:srid=>0, :type=>"geometry"}
@@ -56,18 +63,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_232734) do
 
   create_table "trajectories", force: :cascade do |t|
     t.string "name", null: false
-    t.time "passing_frequency", null: false
+    t.integer "passing_frequency", null: false
     t.integer "estimated_time", null: false
     t.integer "service_cost", null: false
     t.time "start_time", null: false
     t.time "end_time", null: false
     t.point "trajectory_point", null: false
-    t.bigint "cities_id", null: false
-    t.bigint "services_id", null: false
+    t.bigint "city_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cities_id"], name: "index_trajectories_on_cities_id"
-    t.index ["services_id"], name: "index_trajectories_on_services_id"
+    t.index ["city_id"], name: "index_trajectories_on_city_id"
   end
 
   create_table "trajectories_stops", force: :cascade do |t|
@@ -108,8 +113,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_232734) do
   add_foreign_key "schedules", "trajectories"
   add_foreign_key "stops_cities", "cities"
   add_foreign_key "stops_cities", "stops"
-  add_foreign_key "trajectories", "cities", column: "cities_id"
-  add_foreign_key "trajectories", "services", column: "services_id"
+  add_foreign_key "trajectories", "cities"
   add_foreign_key "trajectories_stops", "stops"
   add_foreign_key "trajectories_stops", "trajectories"
   add_foreign_key "units", "types"
