@@ -2,7 +2,7 @@ class StopsController < ApplicationController
     before_action :set_stop, only: %i[show update destroy]
   
     def show
-    @stops = Stop.find_with_schedules(params[:id])
+      @stops = Stop.find_with_schedules(params[:id])
     end
 
     def create
