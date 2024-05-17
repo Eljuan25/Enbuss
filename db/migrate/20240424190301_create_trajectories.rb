@@ -9,7 +9,6 @@ class CreateTrajectories < ActiveRecord::Migration[7.1]
       t.time :end_time, null: false
       t.point :trajectory_point, null: false
       t.references :city, null: false, foreign_key: true
-
       t.timestamps
     end
   end
